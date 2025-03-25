@@ -15,6 +15,8 @@
         <a href="trainings.php">Treeningud</a>
         <a href="pricing.php">Hinnakiri</a>
         <a href="contact.php">Kontakt</a>
+        <a href="login.php">Logi sisse</a>
+        <a href="register.php">Registreeru</a>
     </nav>
 </header>
 
