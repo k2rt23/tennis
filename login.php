@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
+            $_SESSION['user_role'] = $row['role'];
 
             echo "<script>alert('Sisselogimine õnnestus!'); window.location.href='admin_bookings.php';</script>";
             exit();
