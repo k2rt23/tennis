@@ -11,7 +11,7 @@
 <header>
     <nav>
         <a href="index.php">Avaleht</a>
-        <a href="trainings.php">Minust</a>
+        <a href="about.php">Minust</a>
         <a href="trainings.php">Treeningud</a>
         <a href="pricing.php">Hinnakiri</a>
         <a href="contact.php">Kontakt</a>
@@ -19,20 +19,29 @@
 </header>
 
 <main>
-    <h1>Tere tulemast tennisesse!</h1>
-    <p>Siit leiad infot treeningute, broneerimise ja muu kohta.</p>
-    <a href="booking.php" class="button">Broneeri trenn</a>
+    <section class="hero">
+        <h1>Tere tulemast tennisesse!</h1>
+        <p>Siit leiad infot treeningute, broneerimise ja muu kohta.</p>
+        <a href="booking.php" class="cta-button">Broneeri trenn</a>
+    </section>
 
-    <h2>Minust</h2>
-    <p>Olen professionaalne tennisetreener, kellel on rohkem kui 10-aastane kogemus. Olen töötanud algajate ja edasijõudnutega, aidates igal sammul saavutada uusi eesmärke.</p>
-    
-    <img src="img/coach.jpg.jpeg" alt="Treeneri foto">
+    <section class="content">
+        <h2>Minust</h2>
+        <p>Professionaalne tennisetreener, rohkem kui 10-aastase kogemusega, aidates igal sammul saavutada uusi eesmärke.</p>
+    </section>
 
-    <h2>Treeningud ja hinnakiri</h2>
-    <ul>
-        <li>Individuaaltreeningud - 30€/tund</li>
-        <li>Grupitreeningud - 20€/osaleja</li>
-    </ul>
+    <section class="content">
+        <h2>Treeningud</h2>
+        <p>Pakun erinevaid treeningvõimalusi, mis vastavad iga inimese tasemele ja eesmärkidele. Kõik treeningud on kohandatud vastavalt osalejate vajadusele.</p>
+    </section>
+
+    <section class="content">
+        <h2>Hinnakiri</h2>
+        <ul>
+            <li>Individuaaltreeningud - 30€/tund</li>
+            <li>Grupitreeningud - 20€/osaleja</li>
+        </ul>
+    </section>
 </main>
 
 <footer>
