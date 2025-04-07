@@ -11,9 +11,7 @@
 <header>
     <nav>
         <a href="index.php">Avaleht</a>
-        <a href="about.php">Minust</a>
-        <a href="trainings.php">Treeningud</a>
-        <a href="pricing.php">Hinnakiri</a>
+        <a href="trainings.php">Treeningud ja hinnad</a>
         <a href="contact.php">Kontakt</a>
         <a href="login.php">Logi sisse</a>
         <a href="register.php">Registreeru</a>
@@ -21,29 +19,50 @@
 </header>
 
 <main>
-    <section class="hero">
-        <h1>Tere tulemast tennisesse!</h1>
-        <p>Siit leiad infot treeningute, broneerimise ja muu kohta.</p>
-        <a href="booking.php" class="cta-button">Broneeri trenn</a>
+<section class="hero">
+  <h1>LA Tenniseklubi – koht, kus naised kohtuvad mängu, liikumise ja sõprusega</h1>
+  <p>Klubi on loodud just naistele – toetav, elegantne ja turvaline keskkond, kus sport, hea enesetunne ja sotsiaalsus käivad käsikäes.</p>
+  <p>Lisaks treeningutele toimuvad klubis naiste tenniseõhtud, sotsiaalsed turniirid, tenniselaagrid ja klubisündmused. See on rohkem kui trenn – see on sinu klubi.</p>
+</section>
+
+
+<section class="vibe-gallery">
+  <div class="vibe-grid">
+    <img src="img/tennis1.jpg" alt="Tennis 1">
+    <img src="img/tennis2.jpg" alt="Tennis 2">
+    <img src="img/tennis3.jpg" alt="Tennis 3">
+    <img src="img/tennis4.jpg" alt="Tennis 4">
+    <img src="img/tennis5.jpg" alt="Tennis 5">
+    <img src="img/tennis6.jpg" alt="Tennis 6">
+  </div>
+  <p class="vibe-caption">"Tennis. Esteetika. Naised."</p>
+</section>
+
+
+    <section class="content">
+        <h2>Tenniseklubi lugu</h2>
+        <p>LA Tenniseklubi sai alguse lihtsast soovist – luua ruum, kus naised saaksid tennise kaudu liikuda, 
+            lõõgastuda ja üksteisega päriselt kohtuda. Meie treeningud on mitmekesised, kuid rõhk on alati 
+            heal enesetundel, toetaval kogukonnal ja rõõmsal meelel.</p>
     </section>
 
     <section class="content">
-        <h2>Minust</h2>
-        <p>Professionaalne tennisetreener, rohkem kui 10-aastase kogemusega, aidates igal sammul saavutada uusi eesmärke.</p>
-    </section>
-
-    <section class="content">
-        <h2>Treeningud</h2>
-        <p>Pakun erinevaid treeningvõimalusi, mis vastavad iga inimese tasemele ja eesmärkidele. Kõik treeningud on kohandatud vastavalt osalejate vajadusele.</p>
-    </section>
-
-    <section class="content">
-        <h2>Hinnakiri</h2>
+        <h2>Mida me pakume?</h2>
+        <p>Pakume treeninguid algajatele, harrastajatele ja edasijõudnutele – iga naine leiab endale sobiva tempo ja taseme.</p>
         <ul>
-            <li>Individuaaltreeningud - 30€/tund</li>
-            <li>Grupitreeningud - 20€/osaleja</li>
-        </ul>
-    </section>
+  <li>✓ Personaalsed ja grupitrennid vastavalt tasemele</li>
+  <li>✓ Naiste tenniseõhtud ja sotsiaalsed mängud</li>
+  <li>✓ Hooajalised turniirid ja klubisisesed matšid</li>
+  <li>✓ Tenniselaagrid ja nädalavahetuse retriidid</li>
+</ul>
+
+</section>
+
+    <section class="cta-booking">
+    <h2>Valmis alustama treeningutega?</h2>
+    <p>Leia endale sobiv aeg ja tule platsile – ootame sind!</p>
+    <a class="cta-button" href="booking.php">Broneeri trenn</a>
+  </section>
 </main>
 
 <footer>
