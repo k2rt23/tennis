@@ -18,8 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
             $_SESSION['user_role'] = $row['role'];
+            header("Location: my_bookings.php");
+            exit();
+            
 
-            echo "<script>alert('Sisselogimine õnnestus!'); window.location.href='admin_bookings.php';</script>";
             exit();
         } else {
             $error = "Vale parool!";
@@ -39,16 +41,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div class="login-container">
     <h1>Sisselogimine</h1>
 
     <?php if (isset($error)) { echo "<p style='color: red;'>$error</p>"; } ?>
 
-    <form method="POST" action="login.php">
-        <input type="email" name="email" placeholder="E-mail" required>
+    <form class="login-container" method="POST" action="login.php">
+        <input type="text" name="email" placeholder="E-mail" required>
         <input type="password" name="password" placeholder="Parool" required>
         <button type="submit">Logi sisse</button>
+        <p><a href="forgot_password.php">Unustasid parooli?</a></p>
+
     </form>
-    <p>Pole veel kasutajat? <a href="register.php">Registreeru siit</a></p>
+
+    <a href="register.php">Pole veel kasutajat? Registreeru siit</a>
+</div>
 
 </body>
 </html>
