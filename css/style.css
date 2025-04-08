@@ -276,3 +276,204 @@ footer {
 .map-button:hover {
     background-color: #bfa374;
 }
+
+.login-container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 2em;
+    color: #3b2f2f;
+    margin-bottom: 20px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: #eef4ff;
+}
+
+
+.login-container button {
+    background-color: #d1b28e;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #bfa374;
+}
+
+.login-container a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #6d5c4e;
+    font-weight: bold;
+}
+
+.register-container {
+    background-color: #fff;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.register-container h1 {
+    margin-bottom: 20px;
+    color: #3b2f2f;
+}
+
+.register-container input {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    background-color: #eef4ff;
+    box-sizing: border-box;
+}
+
+.register-container button {
+    background-color: #d1b28e;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-container button:hover {
+    background-color: #bfa374;
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+}
+.booking-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.booking-container h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.booking-container p {
+    margin-bottom: 20px;
+}
+
+.booking-container label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.booking-container input,
+.booking-container select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.booking-container button {
+    background-color: #d1b28e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.booking-container button:hover {
+    background-color: #bb9e79;
+}
+'
+.edit-booking-container {
+    max-width: 500px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.edit-booking-container h1 {
+    color: #3a2e2e;
+    margin-bottom: 20px;
+}
+
+.edit-booking-container label {
+    display: block;
+    margin-top: 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.edit-booking-container input,
+.edit-booking-container select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #eef4ff;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.edit-booking-container button {
+    margin-top: 20px;
+    background-color: #d1b28e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.edit-booking-container button:hover {
+    background-color: #bb9e79;
+}
