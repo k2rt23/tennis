@@ -40,14 +40,6 @@
     <h2>Meie asukoht</h2>
 <p>Asume Krulli kvartalis.</p>
 
-<div class="map-info" style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px;">
-
-  <a href="https://www.google.com/maps/place/Franz+Krulli+Tennisemaja/" 
-     target="_blank" 
-     class="map-button" 
-     style="background-color: #d1b28e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">
-  </a>
-</div>
 
 <div id="map" style="width: 100%; height: 400px; border-radius: 10px; margin-bottom: 30px;"></div>
 
@@ -61,6 +53,7 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 17,
     center: location,
+    disableDefaultUI: true 
     });
     const marker = new google.maps.Marker({
       position: location,
