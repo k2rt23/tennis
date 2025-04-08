@@ -1,10 +1,12 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $date = $_POST['date'];
+    session_start();
+    $weekday = $_POST['weekday'];
     $time = $_POST['time'];
     $trainer = $_POST['trainer'];
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $userId = $_SESSION['user_id'];
 
     $host = "localhost";
     $user = "root";
@@ -16,11 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Ühenduse viga: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO bookings (date, time, trainer, name, email) VALUES ('$date', '$time', '$trainer', '$name', '$email')";
+    $sql = "INSERT INTO bookings (weekday, time, trainer, name, email, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssi", $weekday, $time, $trainer, $name, $email, $userId);
 
-    if ($conn->query($sql) === TRUE) {
-        //mail($email, "Broneering kinnitatud", "Tere $name,\n\nTeie broneering on kinnitatud. Siin on teie detailid:\n\nKuupäev: $date\nKellaaeg: $time\nTreener: $trainer\n\nParimate soovidega,\nTennisetreeningud");
-
+    if ($stmt->execute()) {
         echo "Teie broneering on edukalt tehtud. Kinnitus on saadetud teie e-posti aadressile.";
     } else {
         echo "Viga broneeringu salvestamisel: " . $conn->error;
@@ -28,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $conn->close();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,40 +46,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <header>
     <nav>
         <a href="index.php">Avaleht</a>
-        <a href="trainings.php">Minust</a>
-        <a href="contact.php">Treeningud</a>
-        <a href="contact.php">Hinnakiri</a>
+        <a href="contact.php">Treeningud ja hinnad</a>
         <a href="contact.php">Kontakt</a>
-
-
+        <a href="contact.php">Logi sisse</a>
+        <a href="contact.php">Registreeru</a>
     </nav>
 </header>
 
 <main>
+<div class="booking-container">
     <h1>Broneeri treening</h1>
-    <p>Vali kuupäev, kellaaeg ja treener ning täida oma andmed.</p>
+    <p>Vali sobiv kuupäev ja kellaaeg ning täida oma andmed.</p>
 
-    <form action="booking.php" method="post">
-        <label for="date">Vali kuupäev:</label><br>
-        <input type="date" id="date" name="date" required><br><br>
+    <form method="POST" action="booking.php">
+    <label>Vali nädalapäev:</label>
+    <select name="weekday" required>
+        <option value="">-- Vali päev --</option>
+        <option value="Esmaspäev">Esmaspäev</option>
+        <option value="Teisipäev">Teisipäev</option>
+        <option value="Kolmapäev">Kolmapäev</option>
+        <option value="Neljapäev">Neljapäev</option>
+        <option value="Reede">Reede</option>
+    </select>
 
-        <label for="time">Vali kellaaeg:</label><br>
-        <input type="time" id="time" name="time" required><br><br>
+    <label>Vali kellaaeg:</label>
+    <select name="time" required>
+        <option value="">-- Vali kellaaeg --</option>
+        <option value="17:00">17:00</option>
+        <option value="18:00">18:00</option>
+        <option value="19:00">19:00</option>
+        <option value="20:00">20:00</option>
+    </select>
 
-        <label for="trainer">Treener:</label><br>
-        <select id="trainer" name="trainer" required>
-            <option value="trainer1">Treener 1</option>
-            <option value="trainer2">Treener 2</option>
-        </select><br><br>
+    <label>Treener:</label>
+    <select name="trainer" required>
+        <option value="Treener 1">Kärt-Triin Laagus</option>
+    </select>
 
-        <label for="name">Nimi:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+    <label>Nimi:</label>
+    <input type="text" name="name" required>
 
-        <label for="email">E-mail:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
 
-        <input type="submit" value="Broneeri">
-    </form>
+    <button type="submit">Broneeri</button>
+</form>
+
 </main>
 
 <footer>
