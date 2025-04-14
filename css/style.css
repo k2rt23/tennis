@@ -329,65 +329,96 @@ footer {
 }
 
 .register-container {
-    background-color: #fff;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 40px;
+    background-color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
     text-align: center;
-    font-family: 'Arial', sans-serif;
 }
 
 .register-container h1 {
-    margin-bottom: 20px;
+    font-size: 30px;
+    margin-bottom: 30px;
     color: #3b2f2f;
 }
 
+.register-container label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #5e4b3c;
+}
+
 .register-container input {
-    width: 80%;
+    width: 100%;
     padding: 12px;
+    margin-top: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 1em;
-    background-color: #eef4ff;
-    box-sizing: border-box;
+    border: 1px solid #ccc;
 }
 
 .register-container button {
     background-color: #d1b28e;
     color: white;
     padding: 12px 25px;
+    font-size: 1em;
     border: none;
     border-radius: 6px;
-    font-size: 1em;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 20px;
+    width: 100%
 }
 
 .register-container button:hover {
-    background-color: #bfa374;
+    background-color: #bb9e79;
 }
 
 .register-link {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 0.95em;
+    color: #5e4b3c;
+}
+
+.register-link a {
+    color: #d1b28e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    color: #bfa374;
+    text-decoration: underline;
 }
 
 .error-message {
     color: red;
     margin-bottom: 15px;
-}
-.booking-container {
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
+    font-weight: bold;
 }
 
+
+.booking-container {
+    max-width: 600px;
+    margin: 80px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01)
+}
+
+@media (max-width: 1000px) {
+    .booking-container {
+        max-width: 400px;
+        margin: 0 auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
 .booking-container h1 {
     font-size: 28px;
     margin-bottom: 10px;
@@ -428,52 +459,114 @@ footer {
 .booking-container button:hover {
     background-color: #bb9e79;
 }
-'
-.edit-booking-container {
-    max-width: 500px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    text-align: center;
-}
 
-.edit-booking-container h1 {
-    color: #3a2e2e;
-    margin-bottom: 20px;
-}
-
-.edit-booking-container label {
-    display: block;
-    margin-top: 15px;
-    text-align: left;
-    font-weight: bold;
-}
-
-.edit-booking-container input,
-.edit-booking-container select {
+.booking-container input[type="text"],
+.booking-container input[type="email"],
+.booking-container input[type="date"],
+.booking-container select {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #eef4ff;
     box-sizing: border-box;
-    font-size: 1em;
 }
 
-.edit-booking-container button {
+.booking-container table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
-    background-color: #d1b28e;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-size: 1em;
-    cursor: pointer;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.edit-booking-container button:hover {
-    background-color: #bb9e79;
+.booking-container th {
+    background-color: #d1b28e; 
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.booking-container td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.booking-container tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+.booking-container tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.booking-container td {
+    white-space: nowrap; 
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.booking-container th {
+    white-space: nowrap;
+}
+
+
+.booking-container a.edit-link {
+    color: #d1b28e;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.booking-container a.edit-link:hover {
+    color: #b99a74; 
+}
+
+
+.booking-container a.delete-link {
+    color: #c0392b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.booking-container a.delete-link:hover {
+    color: #a93226;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    max-width: 600px;  
+    margin: 0 auto;
+}
+
+
+@media (min-width: 768px) {
+    nav {
+        flex-wrap: nowrap; 
+        max-width: none;   
+    }
+}
+
+.booking-button {
+    display: inline-block;
+    background-color: #d1b28e;  
+    color: white;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.booking-button:hover {
+    background-color: #bfa374;
 }
