@@ -16,11 +16,11 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $id);
     
     if ($stmt->execute()) {
-        echo "<script>alert('Broneering kustutatud!'); window.location.href='admin_bookings.php';</script>";
+        header("Location: my_bookings.php"); 
+        exit();
     } else {
         echo "Viga kustutamisel: " . $conn->error;
     }
-}
-
+    
 $conn->close();
 ?>
