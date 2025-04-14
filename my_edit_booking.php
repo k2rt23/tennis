@@ -35,11 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update->bind_param("ssssssi", $date, $time, $trainer, $name, $email, $bookingId, $userId);
 
     if ($update->execute()) {
-        echo "<script>alert('Broneering uuendatud!'); window.location.href='my_bookings.php';</script>";
+        header("Location: my_bookings.php");
         exit();
     } else {
         echo "Viga salvestamisel: " . $conn->error;
-    }
+    }    
 }
 ?>
 
@@ -47,33 +47,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="et">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muuda oma broneeringut</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Muuda oma broneeringut</h1>
-    <form method="POST">
-        <label>Kuupäev:</label>
-        <input type="date" name="date" value="<?= $booking['date'] ?>" required><br>
 
-        <label>Kellaaeg:</label>
-        <input type="time" name="time" value="<?= $booking['time'] ?>" required><br>
+<?php include 'includes/header.php'; ?> 
 
-        <label>Treener:</label>
-        <select name="trainer" required>
-            <option value="trainer1" <?= ($booking['trainer'] == 'trainer1') ? 'selected' : '' ?>>Treener 1</option>
-            <option value="trainer2" <?= ($booking['trainer'] == 'trainer2') ? 'selected' : '' ?>>Treener 2</option>
-        </select><br>
+<main class="booking-page">
 
-        <label>Nimi:</label>
-        <input type="text" name="name" value="<?= $booking['name'] ?>" required><br>
+<div class="booking-container">
 
-        <label>E-mail:</label>
-        <input type="email" name="email" value="<?= $booking['email'] ?>" required><br>
+<h1>Muuda oma broneeringut</h1>
 
-        <button type="submit">Salvesta muudatused</button>
-    </form>
-</body>
-</html>
+<form method="POST">
 
-<?php $conn->close(); ?>
+    <label>Kuupäev:</label>
+    <input class="form-input" type="date" name="date" value="<?= htmlspecialchars($booking['date']) ?>" required>
+
+    <label>Kellaaeg:</label>
+    <select class="form-input" name="time" required>
+        <option value="17:00" <?= ($booking['time'] == '17:00') ? 'selected' : '' ?>>17:00</option>
+        <option value="18:00" <?= ($booking['time'] == '18:00') ? 'selected' : '' ?>>18:00</option>
+        <option value="19:00" <?= ($booking['time'] == '19:00') ? 'selected' : '' ?>>19:00</option>
+        <option value="20:00" <?= ($booking['time'] == '20:00') ? 'selected' : '' ?>>20:00</option>
+    </select>
+
+    <label>Treener:</label>
+    <select class="form-input" name="trainer" required>
+        <option value="Kärt-Triin Laagus" <?= ($booking['trainer'] == 'Kärt-Triin Laagus') ? 'selected' : '' ?>>Kärt-Triin Laagus</option>
+    </select>
+
+    <label>Nimi:</label>
+    <input class="form-input" type="text" name="name" value="<?= htmlspecialchars($booking['name']) ?>" required>
+
+    <label>E-mail:</label>
+    <input class="form-input" type="email" name="email" value="<?= htmlspecialchars($booking['email']) ?>" required>
+
+    <button class="form-button" type="submit">Salvesta muudatused</button>
+
+</form>
+
+
+</div> 
+</main>
+
+<?php include 'includes/footer.php'; ?>
