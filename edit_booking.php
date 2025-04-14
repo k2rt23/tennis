@@ -60,9 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label>Treener:</label>
         <select name="trainer" required>
-            <option value="trainer1" <?= ($booking['trainer'] == 'trainer1') ? 'selected' : '' ?>>Treener 1</option>
-            <option value="trainer2" <?= ($booking['trainer'] == 'trainer2') ? 'selected' : '' ?>>Treener 2</option>
-        </select><br>
+            <option value="trainer1" <?= ($booking['trainer'] == 'trainer1') ? 'selected' : '' ?>>Kärt-Triin Laagus</option>
 
         <label>Nimi:</label>
         <input type="text" name="name" value="<?= $booking['name'] ?>" required><br>
