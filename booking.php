@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     session_start();
-    $weekday = $_POST['weekday'];
+    $date = $_POST['date'];
     $time = $_POST['time'];
     $trainer = $_POST['trainer'];
     $name = $_POST['name'];
@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Ühenduse viga: " . $conn->connect_error);
     }
 
-    $sql = "INSERT INTO bookings (weekday, time, trainer, name, email, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO bookings (date, time, trainer, name, email, user_id) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssi", $weekday, $time, $trainer, $name, $email, $userId);
+    $stmt->bind_param("sssssi", $date, $time, $trainer, $name, $email, $userId);
 
     if ($stmt->execute()) {
         echo "Teie broneering on edukalt tehtud. Kinnitus on saadetud teie e-posti aadressile.";
@@ -59,44 +59,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <p>Vali sobiv kuupäev ja kellaaeg ning täida oma andmed.</p>
 
     <form method="POST" action="booking.php">
-    <label>Vali nädalapäev:</label>
-    <select name="weekday" required>
-        <option value="">-- Vali päev --</option>
-        <option value="Esmaspäev">Esmaspäev</option>
-        <option value="Teisipäev">Teisipäev</option>
-        <option value="Kolmapäev">Kolmapäev</option>
-        <option value="Neljapäev">Neljapäev</option>
-        <option value="Reede">Reede</option>
-    </select>
 
-    <label>Vali kellaaeg:</label>
-    <select name="time" required>
-        <option value="">-- Vali kellaaeg --</option>
-        <option value="17:00">17:00</option>
-        <option value="18:00">18:00</option>
-        <option value="19:00">19:00</option>
-        <option value="20:00">20:00</option>
-    </select>
+        <label>Vali kuupäev:</label>
+        <input type="date" name="date" id="datePicker" required>
 
-    <label>Treener:</label>
-    <select name="trainer" required>
-        <option value="Treener 1">Kärt-Triin Laagus</option>
-    </select>
+        <label>Vali kellaaeg:</label>
+        <select name="time" required>
+            <option value="">-- Vali kellaaeg --</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+        </select>
 
-    <label>Nimi:</label>
-    <input type="text" name="name" required>
+        <label>Treener:</label>
+        <select name="trainer" required>
+            <option value="Kärt-Triin Laagus">Kärt-Triin Laagus</option>
+        </select>
 
-    <label>E-mail:</label>
-    <input type="email" name="email" required>
+        <label>Nimi:</label>
+        <input type="text" name="name" required>
 
-    <button type="submit">Broneeri</button>
-</form>
+        <label>E-mail:</label>
+        <input type="email" name="email" required>
 
+        <button type="submit">Broneeri</button>
+    </form>
+</div>
 </main>
 
-<footer>
-    <p>&copy; 2025 Tennisetreeningud - Kõik õigused kaitstud</p>
-</footer>
+<script>
+    document.getElementById('datePicker').addEventListener('input', function() {
+        const date = new Date(this.value);
+        const day = date.getDay(); 
 
-</body>
-</html>
+        if (day === 0 || day === 6) {
+            alert('Vali kuupäev esmaspäevast reedeni!');
+            this.value = '';
+        }
+    });
+</script>
