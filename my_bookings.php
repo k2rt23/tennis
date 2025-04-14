@@ -28,51 +28,57 @@ $result = $stmt->get_result();
     <meta charset="UTF-8">
     <title>Minu broneeringud</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body { font-family: Arial; margin: 20px; background-color: #f8f9fa; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 10px; border: 1px solid #ddd; }
-        th { background: #007bff; color: white; }
-        h1 { margin-bottom: 20px; }
-    </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
-    
-    <main>
-        <h1>Minu broneeringud</h1>
 
-        <?php if ($result->num_rows > 0): ?>
-            <table>
-                <tr>
-                    <th>Kuupäev</th>
-                    <th>Kellaaeg</th>
-                    <th>Treener</th>
-                    <th>Nimi</th>
-                    <th>E-mail</th>
-                    <th>Tegevus</th>
-                </tr>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($row['date']) ?></td>
-                        <td><?= htmlspecialchars($row['time']) ?></td>
-                        <td><?= htmlspecialchars($row['trainer']) ?></td>
-                        <td><?= htmlspecialchars($row['name']) ?></td>
-                        <td><?= htmlspecialchars($row['email']) ?></td>
-                        <td>
-    <a href="my_edit_booking.php?id=<?= $row['id'] ?>">Muuda</a>
-    <a href="delete_booking.php?id=<?= $row['id'] ?>" onclick="return confirm('Kas oled kindel, et soovid kustutada?');">Kustuta</a>
-</td>
-                <?php endwhile; ?>
-            </table>
-        <?php else: ?>
-            <p>Sul pole veel ühtegi broneeringut.</p>
-        <?php endif; ?>
-    </main>
+<?php include 'includes/header.php'; ?>
 
-    <footer>
-        <p style="text-align:center;">&copy; 2025 Tennisetreeningud - Kõik õigused kaitstud</p>
-    </footer>
+<main class="booking-page">
+
+<div class="booking-container">
+
+<h1 class="my-bookings-title center-text">Minu broneeringud</h1>
+
+<div class="center-text">
+    <a href="booking.php" class="booking-button">Broneeri uus trenn</a>
+</div>
+
+
+
+<?php if ($result->num_rows > 0): ?>
+    <table>
+        <tr>
+            <th>Kuupäev</th>
+            <th>Kellaaeg</th>
+            <th>Treener</th>
+            <th>Nimi</th>
+            <th>E-mail</th>
+            <th>Tegevus</th>
+        </tr>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?= date('d.m.Y', strtotime($row['date'])) ?></td>
+                <td><?= htmlspecialchars($row['time']) ?></td>
+                <td><?= htmlspecialchars($row['trainer']) ?></td>
+                <td><?= htmlspecialchars($row['name']) ?></td>
+                <td><?= htmlspecialchars($row['email']) ?></td>
+                <td>
+                     <a href="my_edit_booking.php?id=<?= $row['id'] ?>" class="edit-link">Muuda</a>
+                    <a href="delete_booking.php?id=<?= $row['id'] ?>" class="delete-link" onclick="return confirm('Kas oled kindel, et soovid kustutada?');">Kustuta</a>
+                </td> 
+            </tr>
+        <?php endwhile; ?>
+    </table>
+<?php else: ?>
+    <p>Sul pole veel ühtegi broneeringut.</p>
+<?php endif; ?>
+
+</div>
+
+</main>
+
+<?php include 'includes/footer.php'; ?>
+
 </body>
 </html>
 
