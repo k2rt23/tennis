@@ -402,8 +402,8 @@ footer {
 
 
 .booking-container {
-    max-width: 600px;
-    margin: 80px auto;
+    max-width: 650px;
+    margin: 80px auto 120px auto;
     background-color: white;
     padding: 40px;
     border-radius: 10px;
@@ -412,12 +412,16 @@ footer {
 }
 
 @media (max-width: 1000px) {
-    .booking-container {
-        max-width: 400px;
-        margin: 0 auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+.booking-container {
+    max-width: 700px; /* piisavalt lai, et tabel mahuks */
+    margin: 80px auto 160px auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box; /* ⬅️ oluline! */
+}
 }
 .booking-container h1 {
     font-size: 28px;
@@ -479,8 +483,11 @@ footer {
     margin-top: 20px;
     background-color: white;
     border-radius: 8px;
-    overflow: hidden;
+    overflow-x: auto;
+    display: block; 
+    box-sizing: border-box;
 }
+
 
 .booking-container th {
     background-color: #d1b28e; 
