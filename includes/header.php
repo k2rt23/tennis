@@ -2,7 +2,7 @@
 <header>
     <nav>
         <a href="index.php">Avaleht</a>
-        <a href="trainings.php">Treeningud</a>
+        <a href="trainings.php">Treeningud ja hinnad</a>
         <a href="contact.php">Kontakt</a>
 
         <?php if (isset($_SESSION['user_id'])): ?>
