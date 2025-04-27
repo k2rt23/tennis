@@ -35,7 +35,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <h1>Kontakt</h1>
 
     <div class="contact-info">
-        <p><strong>E-mail:</strong> sinuemail@example.com</p>
+        <p><strong>E-mail:</strong> latennis@gmail.com</p>
         <p><strong>Telefon:</strong> +372 5555 5555</p>
         <p><strong>Asukoht:</strong> Tallinn, Eesti</p>
     </div>
