@@ -5,14 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "tennis_db";
-$conn = new mysqli($host, $user, $password, $dbname);
-if ($conn->connect_error) {
-    die("Ühenduse viga: " . $conn->connect_error);
-}
+require_once 'db/config.php';
 
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM bookings WHERE user_id = ? ORDER BY date, time";
