@@ -1,8 +1,3 @@
-<?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-?>
 <header>
     <nav>
         <a href="index.php">Avaleht</a>
