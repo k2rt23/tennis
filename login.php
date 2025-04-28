@@ -17,11 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
-            $_SESSION['user_role'] = $row['role'];
             header("Location: my_bookings.php");
-            exit();
-            
-
             exit();
         } else {
             $error = "Vale parool!";
