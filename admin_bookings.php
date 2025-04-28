@@ -1,23 +1,18 @@
 <?php
 session_start();
+require_once 'db/config.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
+if (!isset($_SESSION['user_id']) || (isset($_SESSION['user_role']) && $_SESSION['user_role'] !== 'admin')) {
     header("Location: index.php"); 
     exit();
 }
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "tennis_db";
-$conn = new mysqli($host, $user, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Ühenduse viga: " . $conn->connect_error);
-}
-
 $sql = "SELECT * FROM bookings ORDER BY date, time";
 $result = $conn->query($sql);
+
+if (!$result) {
+    die("Päringu viga: " . $conn->error);
+}
 ?>
 
 <!DOCTYPE html>
