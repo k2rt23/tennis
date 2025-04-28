@@ -9,26 +9,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Kontrollime, kas paroolid on samad
     if ($password !== $confirm_password) {
         $error = "Paroolid ei kattu!";
     } else {
-        $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+        $check_sql = "SELECT id FROM users WHERE email = ?";
+        $check_stmt = $conn->prepare($check_sql);
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_stmt->store_result();
 
-        $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $name, $email, $password_hashed);
-
-        if ($stmt->execute()) {
-            header("Location: login.php");
-            exit();
+        if ($check_stmt->num_rows > 0) {
+            $error = "Selle e-mailiga kasutaja on juba olemas!";
         } else {
-            $error = "Viga registreerimisel: " . $conn->error;
+            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sss", $name, $email, $password_hashed);
+
+            if ($stmt->execute()) {
+                $to = $email;
+                $subject = "Tere tulemast tenniseklubisse!";
+                $message = "Tere $name!\n\nOlete edukalt registreerunud meie tenniseklubisse.";
+                $headers = "From: sinuemail@domeen.ee";
+
+                mail($to, $subject, $message, $headers);
+
+                header("Location: login.php");
+                exit();
+            } else {
+                $error = "Midagi läks valesti. Palun proovi uuesti.";
+            }
+
+            $stmt->close();
         }
-
-        $stmt->close();
+        $check_stmt->close();
     }
-
     $conn->close();
 }
 ?>
@@ -78,3 +94,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+    
