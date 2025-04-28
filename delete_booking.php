@@ -1,26 +1,26 @@
 <?php
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "tennis_db";
-$conn = new mysqli($host, $user, $password, $dbname);
+session_start();
+require_once 'db/config.php'; 
 
-if ($conn->connect_error) {
-    die("Ühenduse viga: " . $conn->connect_error);
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
 }
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "DELETE FROM bookings WHERE id = ?";
+    $id = (int)$_GET['id'];  
+
+    $sql = "DELETE FROM bookings WHERE id = ? AND user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("ii", $id, $_SESSION['user_id']);
     
     if ($stmt->execute()) {
-        header("Location: my_bookings.php"); 
+        header("Location: my_bookings.php");
         exit();
     } else {
         echo "Viga kustutamisel: " . $conn->error;
     }
-    
+}
+
 $conn->close();
 ?>
