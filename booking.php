@@ -1,6 +1,12 @@
 <?php
+session_start();
+require_once 'db/config.php'; 
+
+if (!isset($_SESSION['user_id'])) {
+    die("Sa pead olema sisse logitud, et broneerida.");
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    session_start();
     $date = $_POST['date'];
     $time = $_POST['time'];
     $trainer = $_POST['trainer'];
@@ -8,29 +14,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $userId = $_SESSION['user_id'];
 
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $dbname = "tennis_db";
-    $conn = new mysqli($host, $user, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Ühenduse viga: " . $conn->connect_error);
+    if (empty($date) || empty($time) || empty($trainer) || empty($name) || empty($email) || empty($userId)) {
+        die("Kõik väljad peavad olema täidetud!");
     }
 
     $sql = "INSERT INTO bookings (date, time, trainer, name, email, user_id) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("SQL päringu ettevalmistamine ebaõnnestus: " . $conn->error);
+    }
+
     $stmt->bind_param("sssssi", $date, $time, $trainer, $name, $email, $userId);
 
     if ($stmt->execute()) {
         echo "Teie broneering on edukalt tehtud. Kinnitus on saadetud teie e-posti aadressile.";
     } else {
-        echo "Viga broneeringu salvestamisel: " . $conn->error;
+        echo "Viga broneeringu salvestamisel: " . $stmt->error;
     }
-
-    $conn->close();
 }
-
 ?>
 
 <!DOCTYPE html>
