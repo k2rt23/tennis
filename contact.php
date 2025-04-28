@@ -2,6 +2,26 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars(trim($_POST["name"]));
+    $email = htmlspecialchars(trim($_POST["email"]));
+    $message = htmlspecialchars(trim($_POST["message"]));
+
+    $to = "latennisest@gmail.com"; 
+    $subject = "Uus kontaktivormi sõnum";
+    $body = "Saadeti kontaktivormilt:\n\nNimi: $name\nEmail: $email\nSõnum:\n$message";
+
+    $headers = "From: $email" . "\r\n" .
+               "Reply-To: $email" . "\r\n" .
+               "Content-Type: text/plain; charset=UTF-8";
+
+    if (mail($to, $subject, $body, $headers)) {
+        echo "<p class='success-message'>Sõnum saadeti edukalt!</p>";
+    } else {
+        echo "<p class='error-message'>Sõnumi saatmine ebaõnnestus. Proovi hiljem uuesti.</p>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
