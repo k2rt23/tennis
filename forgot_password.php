@@ -4,7 +4,6 @@ require_once 'db/config.php';
 $error = "";
 $success = "";
 
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
     $email = trim($_POST['email']);
 
@@ -15,23 +14,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
     $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
-
         $token = bin2hex(random_bytes(16));
         $expires = date("Y-m-d H:i:s", strtotime('+1 hour'));
-
 
         $stmt = $conn->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $email, $token, $expires);
         $stmt->execute();
 
+        $resetLink = "https://latennis.ee/reset_password.php?token=$token";
+        $subject = "Parooli taastamise link";
+        $message = "Tere!\n\nParooli taastamiseks vajuta allolevale lingile:\n$resetLink\n\nLink aegub 1 tunni jooksul.";
+        $headers = "From: no-reply@latennis.ee\r\n" .
+                   "Content-Type: text/plain; charset=utf-8";
 
-        $success = "Saatsime taastamislingi: <a href='reset_password.php?token=$token'>Taasta parool</a>";
+        mail($email, $subject, $message, $headers);
+
+        $success = "✅ Taastamislink saadeti e-mailile.";
     } else {
-        $error = "Seda e-maili ei leitud.";
+        $error = "❌ Seda e-maili ei leitud.";
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="et">
@@ -49,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
             height: 100vh;
             margin: 0;
         }
-
         .reset-container {
             background: white;
             padding: 40px;
@@ -59,13 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
             max-width: 400px;
             text-align: center;
         }
-
         h1 {
             color: #3a2e2e;
             margin-bottom: 25px;
         }
-
-        .reset-container input[type="password"] {
+        input[type="email"] {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
@@ -75,8 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
             box-sizing: border-box;
             font-size: 1em;
         }
-
-        .reset-container button {
+        button {
             background-color: #d1b28e;
             color: white;
             padding: 12px 20px;
@@ -86,27 +85,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['email'])) {
             cursor: pointer;
             margin-top: 10px;
         }
-
-        .reset-container button:hover {
+        button:hover {
             background-color: #bb9e79;
         }
-
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
         .error {
             color: red;
-            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="reset-container">
-        <h1>Parooli muutmine</h1>
+        <h1>Taasta parool</h1>
 
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
+        <?php if (!empty($success)) echo "<div class='message success'>$success</div>"; ?>
+        <?php if (!empty($error)) echo "<div class='message error'>$error</div>"; ?>
 
         <form method="POST">
-            <input type="password" name="password" placeholder="Uus parool" required>
-            <input type="password" name="confirm_password" placeholder="Korda parooli" required>
-            <button type="submit">Muuda parool</button>
+            <input type="email" name="email" placeholder="Sisesta oma e-mail" required>
+            <button type="submit">Saada taastamislink</button>
         </form>
     </div>
 </body>
