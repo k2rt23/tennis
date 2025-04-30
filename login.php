@@ -1,7 +1,7 @@
 <?php
 ob_start();
-session_start(); 
-require_once 'db/config.php'; 
+session_start();
+require_once 'db/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+        
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
@@ -48,11 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" name="password" placeholder="Parool" required>
         <button type="submit">Logi sisse</button>
         <p><a href="forgot_password.php">Unustasid parooli?</a></p>
-
     </form>
 
     <a href="register.php">Pole veel kasutajat? Registreeru siit</a>
 </div>
-
 </body>
 </html>
