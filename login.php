@@ -19,7 +19,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_email'] = $row['email'];
-            header("Location: my_bookings.php");
+            $_SESSION['user_name'] = $row['name'];
+            $_SESSION['role'] = $row['role'];
+
+            if ($row['role'] === 'trainer') {
+                header("Location: trainer_dashboard.php");
+            } else {
+                header("Location: my_bookings.php");
+            }
             exit();
         } else {
             $error = "Vale parool!";
