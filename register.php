@@ -23,15 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-            $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sss", $name, $email, $password_hashed);
+            $stmt->bind_param("ssss", $name, $email, $password_hashed, $role);
 
             if ($stmt->execute()) {
                 $to = $email;
                 $subject = "Tere tulemast tenniseklubisse!";
                 $message = "Tere $name!\n\nOlete edukalt registreerunud meie tenniseklubisse.";
-                $headers = "From: sinuemail@domeen.ee";
+                $headers = "From: kontakt@latennis.ee";
 
                 mail($to, $subject, $message, $headers);
 
@@ -68,22 +68,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p class="error-message"><?= $error ?></p>
     <?php endif; ?>
 
-    <form method="POST">
+    <form method="POST" action="register.php">
+    <label>Nimi:</label>
+    <input type="text" name="name" required>
 
-        <label>Nimi:</label>
-        <input type="text" name="name" required>
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
 
-        <label>E-mail:</label>
-        <input type="email" name="email" required>
+    <label>Parool:</label>
+    <input type="password" name="password" required minlength="6">
 
-        <label>Parool:</label>
-        <input type="password" name="password" minlength="6" required>
+    <label>Korda parooli:</label>
+    <input type="password" name="confirm_password" required minlength="6">
 
-        <label>Korda parooli:</label>
-        <input type="password" name="confirm_password" minlength="6" required>
+    <label>Roll:</label>
+    <select name="role" required>
+        <option value="client">Klient</option>
+        <option value="trainer">Treener</option>
+    </select>
 
-        <button type="submit">Registreeru</button>
-
+    <button type="submit">Registreeru</button>
     </form>
 
     <p class="register-link">On juba kasutaja? <a href="login.php">Logi sisse siit</a></p>
