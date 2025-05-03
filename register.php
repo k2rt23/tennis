@@ -77,10 +77,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="email" name="email" required>
 
         <label>Parool:</label>
-        <input type="password" name="password" required>
+        <input type="password" name="password" minlength="6" required>
 
         <label>Korda parooli:</label>
-        <input type="password" name="confirm_password" required>
+        <input type="password" name="confirm_password" minlength="6" required>
 
         <button type="submit">Registreeru</button>
 
