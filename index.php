@@ -34,9 +34,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <main>
 <section class="hero">
-  <h1>LA Tenniseklubi – koht, kus naised kohtuvad mängu, liikumise ja sõprusega</h1>
-  <p>Klubi on loodud just naistele – toetav, elegantne ja turvaline keskkond, kus sport, hea enesetunne ja sotsiaalsus käivad käsikäes.</p>
-  <p>Lisaks treeningutele toimuvad klubis naiste tenniseõhtud, sotsiaalsed turniirid, tenniselaagrid ja klubisündmused. See on rohkem kui trenn – see on sinu klubi.</p>
+  <h1>LA Tenniseklubi – sportlik vaheldus, mis kestab ka väljaspool tenniseväljakut</h1>
+  <p>Klubi on loodud just naistele, kes hindavad tennist, elegantsi ja koosolemist. Siin kohtuvad sport, heaolu ja kogukond. </p>
+  <p>Sind ootavad mõnusad treeningud, naiste tenniseõhtud, turniirid, tenniselaagrid ja erilised klubisündmused. Vali endale sobiv ja tule naudi!</p>
 </section>
 
 
