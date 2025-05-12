@@ -67,21 +67,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
     $kasutaja_id = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare("INSERT INTO bookings (user_id, date, time, trainer, name, email) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("isssss", $kasutaja_id, $kuupaev, $kellaaeg, $treener, $nimi, $email);
-
-    if ($stmt->execute()) {
-        $_SESSION['booking_success'] = "✅ Broneering edukalt salvestatud!";
-        header("Location: my_bookings.php");
-        exit();
+    $check_stmt = $conn->prepare("SELECT id FROM bookings WHERE user_id = ? AND date = ? AND time = ?");
+    $check_stmt->bind_param("iss", $kasutaja_id, $kuupaev, $kellaaeg);
+    $check_stmt->execute();
+    $check_stmt->store_result();
+    
+    if ($check_stmt->num_rows > 0) {
+        $error = "Sul on sellele ajale juba broneering olemas!";
+        $check_stmt->close();
     } else {
-        $error = "Midagi läks valesti. Palun proovi uuesti.";
-    }
+        $check_stmt->close();
+    
+        $limit_stmt = $conn->prepare("SELECT COUNT(id) FROM bookings WHERE date = ? AND time = ? AND trainer = ?");
+        $limit_stmt->bind_param("sss", $kuupaev, $kellaaeg, $treener);
+        $limit_stmt->execute();
+        $limit_stmt->bind_result($count);
+        $limit_stmt->fetch();
+        $limit_stmt->close();
+    
+        if ($count >= 8) {
+            $error = "See treening on juba täis! Palun vali teine aeg.";
+        } else {
+            $stmt = $conn->prepare("INSERT INTO bookings (user_id, date, time, trainer, name, email) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("isssss", $kasutaja_id, $kuupaev, $kellaaeg, $treener, $nimi, $email);
+    
+            if ($stmt->execute()) {
+                $_SESSION['booking_success'] = "✅ Broneering edukalt salvestatud!";
+                header("Location: my_bookings.php");
+                exit();
+            } else {
+                $error = "Midagi läks valesti. Palun proovi uuesti.";
+            }
 
-    $stmt->close();
+            $stmt->close();
+        }
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="et">
 <head>
